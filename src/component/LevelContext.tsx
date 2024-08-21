@@ -1,16 +1,6 @@
 import {createContext} from 'react';
+import {LevelContextType} from "../models/model.tsx";
 
-interface TodoItem {
-    id: string;
-    text: string;
-    completed: boolean;
-}
-
-interface LevelContextType {
-    todos: TodoItem[];
-    removeTodo: (id: string) => void;
-    toggleComplete: (id: string) => void;
-}
 
 const LevelContext = createContext<LevelContextType>({
     todos: [],

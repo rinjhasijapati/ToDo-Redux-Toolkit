@@ -1,41 +1,25 @@
 import ShowListItem from "./ShowListItem.tsx";
 import {List} from "@mui/material";
-import LevelContext from "./LevelContext.tsx";
-
-// interface TodoItems {
-//     id: string;
-//     text: string;
-//     completed: boolean;
-// }
-//
-// interface ShowlistProp {
-//     todos: TodoItems[];
-//     removeTodo: (id: string) => void;
-//     toggleComplete: (id: string) => void;
-// }
-
-//{todos, removeTodo, toggleComplete} : ShowlistProp
-
+import {useSelector} from "react-redux";
+import {AppState} from "../redux/store.tsx";
 
 function ShowList() {
+    const todos = useSelector((state: AppState) => state.todos);
+
     return (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
             <List>
-                <LevelContext.Consumer>
-                    {({ todos, removeTodo, toggleComplete }) => (
-                        todos.map((todo) => (
+                {todos.map((todo) => (
                             <ShowListItem
                                 key={todo.id}
                                 todo={todo}
-                                removeTodo={removeTodo}
-                                toggleComplete={toggleComplete}
                             />
-                        ))
-                    )}
-                </LevelContext.Consumer>
+                        ))}
             </List>
         </div>
     )
 }
 
 export default ShowList
+
+

@@ -2,46 +2,20 @@
 import {Box, Button, TextField, Typography} from '@mui/material';
 import {useState} from "react";
 import ShowList from "./ShowList.tsx";
-import LevelContext from "./LevelContext.tsx";
+import {useDispatch} from "react-redux";
+import {addTodo} from "../redux/actions.tsx";
 
-
-interface TodoItem {
-    id: string;
-    text: string;
-    completed: boolean;
-}
 
 function Todo () {
-    const [todos, setTodos] = useState<TodoItem[]>([]);
     const [newTodo, setNewTodo] = useState('');
+    const dispatch = useDispatch();
 
-    const addTodo = () => {
-        if (newTodo !== '') {
-            const newId = crypto.randomUUID();
-            const newTodoItem: TodoItem = {
-                id: newId,
-                text: newTodo,
-                completed: false,
-            };
-            setTodos([...todos, newTodoItem]);
+    const handleAddTodo = () => {
+        if(newTodo.trim()) {
+            dispatch(addTodo(newTodo));
             setNewTodo('');
         }
-    };
-
-    const removeTodo = (id: string) => {
-        const updatedTodos = todos.filter((todo) => todo.id !== id);
-        setTodos(updatedTodos);
-    };
-
-    const toggleComplete = (id: string) => {
-        const updatedTodos = todos.map((todo) => {
-            if (todo.id === id) {
-                return { ...todo, completed: !todo.completed };
-            }
-            return todo;
-        });
-        setTodos(updatedTodos);
-    };
+    }
 
     return (
         <Box>
@@ -54,15 +28,13 @@ function Todo () {
             <Button
                 variant="contained"
                 color="success"
-                onClick={addTodo}
+                onClick={handleAddTodo}
                 sx={{ margin: '8px 16px' }}
             >Add</Button>
             </div>
 
             <div>
-                <LevelContext.Provider value={{todos, removeTodo, toggleComplete}} >
-                    <ShowList />
-                </LevelContext.Provider>
+                <ShowList />
             </div>
 
         </Box>
