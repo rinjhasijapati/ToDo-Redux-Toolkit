@@ -1,14 +1,13 @@
-
 import {Box, Button, TextField, Typography} from '@mui/material';
 import {useState} from "react";
 import ShowList from "./ShowList.tsx";
-import {useDispatch} from "react-redux";
 import {addTodo} from "../redux/actions.tsx";
+import {useAppDispatch} from "../redux/store.tsx";
 
 
 function Todo () {
     const [newTodo, setNewTodo] = useState('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleAddTodo = () => {
         if(newTodo.trim()) {

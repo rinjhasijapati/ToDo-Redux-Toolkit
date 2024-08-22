@@ -9,7 +9,7 @@ export interface TodoItem {
 export interface TodoState {
     todos: TodoItem[];
 }
- //
+
 const initialState: TodoState = {
     todos: [],
 }
@@ -32,7 +32,7 @@ interface ToggleTodoAction {
 // type Action = { type: 'ADD_TODO' | 'REMOVE_TODO' | 'TOGGLE_TODO', payload: string | TodoItem };
 //or
 type Action = AddTodoAction | RemoveTodoAction | ToggleTodoAction;
-//
+
 
 const todoReducer = (state = initialState, action: Action): TodoState => {
     switch (action.type) {
@@ -72,28 +72,3 @@ export default todoReducer
 
 
 
-// const todoSlice = createSlice({
-//     name: 'todos',
-//     initialState,
-//     reducers: {
-//         addTodo: (state, action: PayloadAction<string>) => {
-//             state.todos.push({
-//                 id: crypto.randomUUID(),
-//                 text: action.payload,
-//                 completed: false,
-//             });
-//         },
-//         removeTodo: (state, action: PayloadAction<string>) => {
-//             state.todos = state.todos.filter(todo => todo.id !== action.payload);
-//         },
-//         toggleTodo: (state, action: PayloadAction<string>) => {
-//             const todo = state.todos.find(todo => todo.id === action.payload);
-//             if (todo) {
-//                 todo.completed = !todo.completed;
-//             }
-//         },
-//     },
-// });
-//
-// export const { addTodo, removeTodo, toggleTodo } = todoSlice.actions;
-// export default todoSlice.reducer;

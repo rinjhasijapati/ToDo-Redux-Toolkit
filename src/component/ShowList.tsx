@@ -1,10 +1,10 @@
 import ShowListItem from "./ShowListItem.tsx";
 import {List} from "@mui/material";
-import {useSelector} from "react-redux";
-import {AppState} from "../redux/store.tsx";
+import {useAppSelector} from "../redux/store.tsx";
+
 
 function ShowList() {
-    const todos = useSelector((state: AppState) => state.todos);
+    const todos = useAppSelector((state) => state.todos.todos);
 
     return (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
@@ -21,5 +21,9 @@ function ShowList() {
 }
 
 export default ShowList
+
+
+
+
 
 
